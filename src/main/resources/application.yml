@@ -15,6 +15,12 @@ spring:
 logging:
   level:
     org.hibernate.sql: debug
-#    org.hibernate.type: trace # parameter 값 보기
-    p6spy: info # 기존 trace 보다 parameter 값을 더 보기 좋게 나타냄
+    org.hibernate.type: trace # parameter 값 보기
 
+decorator:
+  datasource:
+    # p6spy 설정 적용
+    p6spy:
+      enable-logging: true
+      multiline: true
+      logging: slf4j
