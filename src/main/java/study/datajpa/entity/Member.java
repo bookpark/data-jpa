@@ -8,6 +8,15 @@ import lombok.*;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
+/**
+ * NamedQuery의 장점:
+ * 애플리케이션 로딩 시점에 파싱을 해보고
+ * 오류가 있다면 발견할 수 있음
+ */
+@NamedQuery(
+        name = "Member.findByUsername",
+        query = "select m from Member m where m.username = :username"
+)
 public class Member {
     @Id
     @GeneratedValue
