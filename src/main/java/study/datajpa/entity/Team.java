@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"id", "name"})
+@ToString
 public class Team {
     @Id
     @GeneratedValue
@@ -19,6 +19,7 @@ public class Team {
     private Long id;
     private String name;
     @OneToMany(mappedBy = "team")
+    @ToString.Exclude
     private List<Member> members = new ArrayList<>();
 
     public Team(String name) {
