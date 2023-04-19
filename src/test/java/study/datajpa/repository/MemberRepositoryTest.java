@@ -12,6 +12,7 @@ import study.datajpa.entity.Team;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -146,5 +147,17 @@ class MemberRepositoryTest {
         for (Member member : usernameList) {
             System.out.println("member = " + member);
         }
+    }
+
+    @Test
+    public void returnType() {
+        Member m1 = new Member("AAA", 10);
+        Member m2 = new Member("BBB", 20);
+        memberRepository.save(m1);
+        memberRepository.save(m2);
+
+        List<Member> result = memberRepository.findListByUsername("AAA"); // 없으면 빈 리스트
+        Member findMember = memberRepository.findMemberByUsername("AAA"); // 없으면 Null
+        Optional<Member> optional = memberRepository.findOptionalByUsername("AAA"); // 데이터가 있을지 없을지 모르면 그냥 Optional
     }
 }
