@@ -223,4 +223,30 @@ class MemberRepositoryTest {
         //then
         assertThat(resultCount).isEqualTo(3);
     }
+
+    @Test
+    public void queryHint() {
+        //given
+        Member member1 = new Member("member1", 10);
+        memberRepository.save(member1);
+        em.flush(); // 영속성 컨텍스트의 결과를 DB에 동기화
+        em.clear(); // 영속성 컨텍스트 날림
+
+        //when
+        Member findMember = memberRepository.findReadyOnlyByUsername("member1");
+        findMember.setUsername("member2");
+        em.flush(); // 변경 감지를 하기 위해선 원본도 가지고 있어야함
+    }
+
+    @Test
+    public void lock() {
+        //given
+        Member member1 = new Member("member1", 10);
+        memberRepository.save(member1);
+        em.flush(); // 영속성 컨텍스트의 결과를 DB에 동기화
+        em.clear(); // 영속성 컨텍스트 날림
+
+        //when
+        List<Member> result = memberRepository.findLockByUsername("member1");
+    }
 }
