@@ -1,6 +1,5 @@
 package study.datajpa.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,12 +11,15 @@ import java.util.List;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-public class Team {
+public class Team extends JpaBaseEntity {
+
     @Id
     @GeneratedValue
     @Column(name = "team_id")
     private Long id;
+
     private String name;
+
     @OneToMany(mappedBy = "team")
     @ToString.Exclude
     private List<Member> members = new ArrayList<>();
@@ -25,4 +27,5 @@ public class Team {
     public Team(String name) {
         this.name = name;
     }
+
 }
