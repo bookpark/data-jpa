@@ -12,6 +12,14 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
+
+  data:
+    web:
+      pageable:
+        default-page-size: 10
+        max-page-size: 2000
+#        one-indexed-parameters: true # index 1부터 시작, but pageNumber는 그대로 0부터 시작
+
 logging:
   level:
     org.hibernate.sql: debug
